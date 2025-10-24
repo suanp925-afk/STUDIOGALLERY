@@ -3,94 +3,141 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Personal Image Gallery (Local)</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Simple Working Webpage</title>
+  <style>
+    :root{--accent:#4f46e5;--bg:#f8fafc;--card:#ffffff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.4;background:var(--bg);color:#0f172a}
+    header{background:linear-gradient(90deg,rgba(79,70,229,.08),transparent);backdrop-filter: blur(6px);position:sticky;top:0;z-index:40}
+    .container{max-width:1000px;margin:0 auto;padding:24px}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    nav a{margin-left:14px;text-decoration:none;color:var(--muted);font-weight:600}
+    .hero{padding:48px 0;display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
+    .card{background:var(--card);border-radius:14px;padding:20px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    h1{font-size:28px;margin:0 0 8px}
+    p.lead{color:var(--muted);margin:0 0 16px}
+    .features{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .feature{background:#f1f5f9;padding:10px 12px;border-radius:8px;font-size:13px;color:#334155}
+    .cta{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}
+    form{display:flex;flex-direction:column;gap:10px}
+    input,textarea{padding:10px;border-radius:8px;border:1px solid #e6edf3;font-size:14px}
+    input:focus,textarea:focus{outline:2px solid rgba(79,70,229,.18);border-color:var(--accent)}
+    .row{display:flex;gap:10px}
+    footer{padding:28px 0;color:var(--muted);text-align:center}
+    @media (max-width:880px){.hero{grid-template-columns:1fr;}.nav{flex-direction:column;align-items:flex-start}.brand{margin-bottom:8px}}
+  </style>
 </head>
 <body>
-  <main id="app">
-    <!-- Auth area -->
-    <section id="auth" class="card">
-      <h1>Personal Image Gallery</h1>
-
-      <div id="auth-panels">
-        <form id="login-form" class="auth-form">
-          <h2>Login</h2>
-          <label>
-            Username
-            <input type="text" id="login-username" required autocomplete="username">
-          </label>
-          <label>
-            Password
-            <input type="password" id="login-password" required autocomplete="current-password">
-          </label>
-          <div class="row">
-            <button type="submit" class="btn primary">Log in</button>
-            <button type="button" id="show-register" class="btn">Register</button>
-          </div>
-          <p class="note">Demo account: <strong>demo</strong> / <strong>demo123</strong></p>
-        </form>
-
-        <form id="register-form" class="auth-form hidden">
-          <h2>Register</h2>
-          <label>
-            Username
-            <input type="text" id="reg-username" required>
-          </label>
-          <label>
-            Password
-            <input type="password" id="reg-password" required>
-          </label>
-          <label>
-            Confirm Password
-            <input type="password" id="reg-password-confirm" required>
-          </label>
-          <div class="row">
-            <button type="submit" class="btn primary">Create account</button>
-            <button type="button" id="show-login" class="btn">Back to login</button>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <!-- Gallery area -->
-    <section id="gallery" class="hidden">
-      <header class="topbar">
-        <div class="title">
-          <h2 id="greeting">Hello</h2>
-          <p id="subtitle">Your personal gallery</p>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">OW</div>
+        <div>
+          <div style="font-weight:800">Owl Studio</div>
+          <div style="font-size:12px;color:var(--muted)">clean · accessible · responsive</div>
         </div>
-        <div class="controls">
-          <label class="upload-btn btn">
-            Upload images
-            <input type="file" id="file-input" accept="image/*" multiple hidden>
-          </label>
-          <button id="export-btn" class="btn">Export</button>
-          <button id="logout-btn" class="btn danger">Log out</button>
-        </div>
-      </header>
-
-      <div class="card inset">
-        <div id="uploader-info" class="muted">Supported: JPG, PNG, GIF. Max file size: 5 MB each.</div>
-        <div id="gallery-grid" class="grid"></div>
-        <div id="empty-state" class="empty">No images yet — upload your first images.</div>
       </div>
-    </section>
-
-    <!-- Modal viewer -->
-    <div id="modal" class="modal hidden" tabindex="-1" aria-hidden="true">
-      <div class="modal-content">
-        <button id="modal-close" class="modal-close" aria-label="Close">&times;</button>
-        <img id="modal-image" alt="Full view">
-        <div class="modal-actions">
-          <button id="modal-prev" class="btn">Prev</button>
-          <button id="modal-delete" class="btn danger">Delete</button>
-          <button id="modal-next" class="btn">Next</button>
-        </div>
-        <div id="modal-caption" class="muted small"></div>
-      </div>
+      <nav aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="#contact">Get Started</a>
+      </nav>
     </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="card">
+          <h1>Simple, working webpage — ready to use</h1>
+          <p class="lead">A compact, responsive template you can drop into a file called <code>index.html</code>. No build tools required. Edit the text, add images, and link a backend when you want to collect real submissions.</p>
+
+          <div class="features" id="features">
+            <div class="feature">Responsive layout</div>
+            <div class="feature">Accessible form</div>
+            <div class="feature">No external libs</div>
+            <div class="feature">Lightweight CSS</div>
+          </div>
+
+          <p style="margin-top:16px">Want this customized (colors, fonts, sections)? Tell me what to change and I’ll update it.</p>
+
+        </div>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h3 style="margin-top:0">Contact us</h3>
+          <form id="contact" onsubmit="submitForm(event)">
+            <label for="name">Name</label>
+            <input id="name" name="name" placeholder="Your name" required />
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="How can we help?" rows="4" required></textarea>
+
+            <div class="row">
+              <button type="submit" class="cta">Send</button>
+              <button type="button" onclick="resetForm()" style="padding:10px 12px;border-radius:10px;background:#eef2ff;border:0;font-weight:700">Clear</button>
+            </div>
+
+            <div id="status" aria-live="polite" style="font-size:13px;color:var(--muted);margin-top:8px"></div>
+          </form>
+        </div>
+
+        <div style="height:12px"></div>
+        <div class="card">
+          <h4 style="margin:0 0 6px">Quick tips</h4>
+          <ul style="margin:0;padding-left:18px;color:var(--muted)">
+            <li>Open this file in a browser (double-click).</li>
+            <li>To collect real responses, connect the form to a server or use a service like Formspree.</li>
+            <li>Replace the logo and texts to match your brand.</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <section style="margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="card">
+        <h3 style="margin-top:0">About Owl Studio</h3>
+        <p style="color:var(--muted)">We build small, fast sites and experiments. This template is intentionally minimal so it's easy to understand and modify.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Features you can add</h3>
+        <p style="color:var(--muted);margin:0">Examples: image gallery, blog, contact with file upload, signup with OAuth, or a small e-commerce cart.</p>
+      </div>
+    </section>
   </main>
 
-  <script src="app.js" defer></script>
+  <footer>
+    <div class="container">
+      <div style="max-width:900px;margin:0 auto;padding:12px 0">© Owl Studio — built with a simple template. — <small style="color:var(--muted)">no tracking, no bloat</small></div>
+    </div>
+  </footer>
+
+  <script>
+    function submitForm(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const status = document.getElementById('status');
+
+      // simple client-side validation
+      if(!name || !email || !message){ status.textContent = 'Please complete all fields.'; return }
+
+      // simulate sending (no backend in this template)
+      status.textContent = 'Sending...';
+      setTimeout(()=>{
+        console.log('FORM SUBMIT', {name,email,message});
+        status.textContent = 'Thanks — your message was recorded locally (check the console).';
+        e.target.reset();
+      },700);
+    }
+    function resetForm(){ document.getElementById('contact').reset(); document.getElementById('status').textContent=''; }
+  </script>
 </body>
 </html>
